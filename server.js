@@ -26,6 +26,9 @@ const routes = {
   },
   '/articles/:id/downvote': {
     'PUT': downvoteArticle
+  },
+  comments: {
+    
   }
 };
 
