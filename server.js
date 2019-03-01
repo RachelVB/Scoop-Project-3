@@ -29,7 +29,20 @@ const routes = {
   },
   '/articles/:id/downvote': {
     'PUT': downvoteArticle
-  }
+  },
+  /* We need this method to create a new comment.  */
+  '/comments': {
+    'POST': createComment
+  },
+  '/comments/:id': {
+
+  },
+  '/comments/:id/upvote': {
+
+  },
+  '/comments/:id/downvote': {
+
+  },
 };
 
 function getUser(url, request) {
