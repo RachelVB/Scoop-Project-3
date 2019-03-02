@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "chai": "^4.1.1",
-    "mocha": "^3.5.0",
+    "mocha": "^3.5.3",
     "node-localstorage": "^1.3.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -22,6 +22,7 @@
     "webpack": "^3.5.5"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "testdbg": "mocha --inspect-brk"
   }
 }
