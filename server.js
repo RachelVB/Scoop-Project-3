@@ -35,7 +35,8 @@ const routes = {
     'POST': createComment
   },
   '/comments/:id': {
-
+    'PUT': addCommentId,
+    'DELETE': deleteComment
   },
   '/comments/:id/upvote': {
 
@@ -254,6 +255,75 @@ function downvote(item, username) {
     item.downvotedBy.push(username);
   }
   return item;
+}
+
+function createComment(url, request) {
+  const newComment = request.body && request.body.article;
+
+  const response = {};
+
+  if (newComment && newComment.id && database.users[newComment.username]) {
+    const comments = {
+      id:database.nextCommentId++,
+      body: newComment.body,
+      username: newComment.username,
+      articleId: newComment.articleId,
+      upvotedBy: [],
+      downvotedBy: []
+    };
+    database.comments[comment.id] = comment;
+    database.users[comment.username].commentIds.push(comment.id);
+
+    response.body = {comment: comment};
+    response.status = 201;
+  } else {
+    response.status = 400;
+  }
+  return response;
+}
+
+function addCommentId(url, request) {
+  const commentIds = Number(url.split('/').filter(segment => segment)[1]);
+  const commentId = database.comments[id];
+  const response = {};
+
+  if (commentId) {
+    database.comments = comment.commentIds.map(
+      commentId => database.comments[commentId]);
+
+    response.body = {comment: commentId};
+    response.status = 200;
+  } else if (commentId) {
+    response.status = 404;
+  } else {
+    response.status = 400;
+  }
+
+  return response;
+}
+
+function deleteComment(url) {
+  const id = Number(commentId.url);
+  const savedComment = database.comments[id];
+  const response = {};
+
+  if (savedComment) {
+    database.comments[id] = null;
+    savedComment.commentIds.forEach(commentId => {
+      const comment = database.comments[commentId];
+      database.comments[commentId] = null;
+      const userCommentIds = database.users[comment.username].commentIds;
+      userCommentIds.splice(userCommentIds.indexOf(id), 1);
+    });
+
+    const userCommentIds = database.users[savedComment.username].commentId;
+    userCommentIds.splice(userCommentIds.indexOf(id), 1);
+    response.status = 204;
+  } else {
+    response.status = 400;
+  }
+
+  return response;
 }
 
 // Write all code above this line.
